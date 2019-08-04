@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: Parse Zip files
+Implementation-Version: 0.1.0
+Main-Class: parsezip.main.Main
+

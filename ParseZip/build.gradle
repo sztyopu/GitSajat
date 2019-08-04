@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'com.parse.zip'
+version = '0.1.0'
+sourceCompatibility = '1.8'
+
+//create a single Jar with all dependencies
+task buildJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Parse Zip files',
+                'Implementation-Version': version,
+                'Main-Class': 'parsezip.main.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    api 'org.apache.commons:commons-math3:3.6.1'
+
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'com.google.guava:guava:27.0.1-jre'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
