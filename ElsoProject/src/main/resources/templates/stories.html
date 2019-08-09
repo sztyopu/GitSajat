@@ -38,7 +38,7 @@
                 <a class="navbar-brand" href="#">napiSFJ.com</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
-                <p class="navbar-text navbar-right" >IP címed: <a href="#" class="navbar-link">127.0.0.1</a></p>
+                <p class="navbar-text navbar-right" th:text="#{yourip}" >IP címed: <a href="#" class="navbar-link">127.0.0.1</a></p>
             </div>
         </div>
     </nav>
@@ -47,7 +47,7 @@
     <article th:each= "story: ${stories}">
         <header>
             <h1 th:text= "${story.title}">Ez itt a cím</h1> 
-            <p th:text= "${story.posted}">Posted on September 31, 2015 at 10:00 PM</p>
+            <p th:text= "${#dates.format(story.posted,'yyyy.MM.dd HH:mm')}">Posted on September 31, 2015 at 10:00 PM</p>
         </header>
     
  	    <section th:utext= "${story.content}">
@@ -71,7 +71,7 @@
     </article>
 
     <footer>
-        <p >Készült az San Franciscoból Jöttem csapata megbízásából</p>
+        <p th:text="#{footerText}">Készült az San Franciscoból Jöttem csapata megbízásából</p>
     </footer>
 
 </div>
