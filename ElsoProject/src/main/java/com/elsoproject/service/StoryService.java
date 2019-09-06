@@ -30,14 +30,14 @@ public class StoryService {
 		this.bloggerRepo = bloggerRepo;
 	}
 	//Ez fogja kimenteni az adatokat a kodbol
-	@PostConstruct
-	public void init() {
-		Blogger blogger = new Blogger("Belső Gyula",25);
-		bloggerRepo.save(blogger);
-		
-		Story story = new Story("Belső Cim", "Belső Tartalom", new Date(), blogger);
-		storyRepo.save(story);
-	}
+//	@PostConstruct
+//	public void init() {
+//		Blogger blogger = new Blogger("Belső Gyula",25);
+//		bloggerRepo.save(blogger);
+//		
+//		Story story = new Story("Belső Cim", "Belső Tartalom", new Date(), blogger);
+//		storyRepo.save(story);
+//	}
 
 
 
@@ -45,7 +45,13 @@ public class StoryService {
 		return storyRepo.findAll();
 	}
 	
-	
+	public Story getStory(){
+		return storyRepo.findFirstByOrderByPostedDesc();
+	}
+
+	public Story getSpecificStory(String title) {
+		return storyRepo.findByTitle(title);
+	}
 	
 	
 }

@@ -2,6 +2,7 @@ package com.elsoproject.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
+//(name = "stories")
 public class Story {
 	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	private Long id;
+	//@Column(name = "cím")
 	private String title;
 	private String content; 
 	private Date posted;

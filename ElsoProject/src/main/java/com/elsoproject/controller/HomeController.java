@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,20 @@ public class HomeController {
 		return "stories";
 	}
 	
-	
+	@RequestMapping("/story")
+	public String story(Model model) {
+		model.addAttribute("pageTitle", "Minden napra egy SFJ sztori!");
+		model.addAttribute("story", storyService.getStory());
+		return "story";
+	}
+
+	@RequestMapping("/title/{title}")
+	public String searchForUser(@PathVariable(value = "title") String title, Model model) throws Exception {
+		if (title == null)
+			throw new Exception("Nincs ilyen címmel sztorink!");
+		model.addAttribute("story", storyService.getSpecificStory(title));
+		return "story";
+	}
 //	private List<Story> getStories(){
 //		List<Story> stories = storyRepo.findAll();
 		

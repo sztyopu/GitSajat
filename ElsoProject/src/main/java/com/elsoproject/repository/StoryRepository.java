@@ -7,5 +7,11 @@ import com.elsoproject.domain.Story;
 
 public interface StoryRepository extends CrudRepository<Story, Long> {
 
-	List<Story> findAll(); 
+	//SELECT * FROM STORY
+	List<Story> findAll();
+	
+	//SELECT * FROM STORY WHERE posted IN (SELECT max(posted) FROM story) LIMIT 1;
+	Story findFirstByOrderByPostedDesc();
+
+	Story (String title);
 }
