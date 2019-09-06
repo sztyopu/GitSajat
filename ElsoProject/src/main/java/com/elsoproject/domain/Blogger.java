@@ -24,10 +24,13 @@ public class Blogger {
 		
 	}
 	
-	public Blogger(String name, int age){
+	
+	
+	public Blogger(String name, int age) {
 		this.name = name;
 		this.age = age;
 	}
+
 	
 	public Long getId() {
 		return id;
