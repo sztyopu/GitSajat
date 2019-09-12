@@ -52,6 +52,10 @@ public class StoryService {
 	public Story getSpecificStory(String title) {
 		return storyRepo.findByTitle(title);
 	}
+
+	public List<Story> getStoriesByBloggername(String name) {
+		return storyRepo.findAllByBloggerNameIgnoreCaseOrderByPostedDesc(name);
+	}
 	
 	
 }

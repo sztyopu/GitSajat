@@ -76,10 +76,10 @@ public class Story {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Story [title=" + title + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Story [title=" + title + "]";
+//	}
 
 
 	public Long getId() {
