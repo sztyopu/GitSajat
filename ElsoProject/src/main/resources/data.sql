@@ -1,9 +1,4 @@
-insert into Blogger (age,name) VALUES (21, 'Gyula');
-insert into Blogger (age,name) VALUES (26, 'Krisz');
-
-INSERT INTO Story (title, content, posted, blogger_id) VALUES ('Teszt CÍM', 'Tesz tartalom', CURRENT_DATE(), (SELECT id FROM Blogger WHERE name = 'Gyula'));
-
-insert into STORY (title,content,posted,blogger_id) values ('Teszt2 cím','Teszt2 tartalom2', CURRENT_DATE(), (select id FROM BLOGGER where name = 'Gyula') );
-insert into STORY (title,content,posted,blogger_id) values ('Krisz cím','Krisz tartalom', CURRENT_DATE(), (select id FROM BLOGGER where name = 'Krisz') );
-insert into STORY (title,content,posted,blogger_id) values ('Krisz2 cím','Krisz2 tartalom2', CURRENT_DATE(), (select id FROM BLOGGER where name = 'Krisz') );
-insert into STORY (title,content,posted,blogger_id) values ('szia','Szia tartalom2', CURRENT_DATE(), (select id FROM BLOGGER where name = 'Krisz') );
+insert into Blogger (id, age, name) VALUES (1, 21, 'Gyula');
+insert into Blogger (id, age, name) VALUES (2, 26, 'Krisz');
+insert into STORY (id,title,content,posted,blogger_id) values (1, 'Teszt cím','Teszt tartalom', '2019-08-17', (select id FROM BLOGGER where name = 'Gyula') );
+insert into STORY (id,title,content,posted,blogger_id) values (2, 'Teszt2 cím','Teszt2 tartalom2', '2019-08-16', (select id FROM BLOGGER where name = 'Gyula') );

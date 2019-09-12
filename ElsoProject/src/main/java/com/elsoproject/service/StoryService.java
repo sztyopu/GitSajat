@@ -29,7 +29,7 @@ public class StoryService {
 	public void setBloggerRepo(BloggerRepository bloggerRepo) {
 		this.bloggerRepo = bloggerRepo;
 	}
-	//Ez fogja kimenteni az adatokat a kodbol
+//Ez fogja kimenteni az adatokat a kodbol
 //	@PostConstruct
 //	public void init() {
 //		Blogger blogger = new Blogger("Belső Gyula",25);

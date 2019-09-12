@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 public class Story {
 	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//IDENTITY
 	@Id
 	private Long id;
 	//@Column(name = "cím")
