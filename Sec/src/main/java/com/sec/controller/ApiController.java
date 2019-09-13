@@ -13,13 +13,13 @@ public class ApiController {
 		return "Főoldal";
 	}
 	
-	@Secured ("ROLE_USER")
+//	@Secured ("ROLE_USER") - a configban beallitjuk, ide mar nem kell
     @RequestMapping("/stories")
     public String stories() {
     	return "Stories";
     }
     
-	@Secured ("ROLE_ADMIN")
+//	@Secured ("ROLE_ADMIN")
     @RequestMapping("/delete")
     public String delete() {
     	return "Delete";
