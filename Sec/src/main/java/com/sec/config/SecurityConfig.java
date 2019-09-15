@@ -32,12 +32,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSec) throws Exception {
 	   httpSec
 		  .authorizeRequests()
-			   .antMatchers(HttpMethod.GET,"/").permitAll()  //mindenki elerheti a gyokert
-               .antMatchers("/delete").hasRole("ADMIN")     //ezt csak az admin 
-               .antMatchers("/admin/**").hasRole("ADMIN")   //admin/barmi -t is csak az admin 
-               .antMatchers("/stories").hasRole("USER")	
-               .and()
-   			  .formLogin()                                  //mindenki szamara engedelyezve van a login felulet 
-   		       .permitAll();
+			   .antMatchers("/admin/**").hasRole("ADMIN")   //admin/barmi -t is elerhet csak az admin 
+			   .anyRequest().authenticated()				// mindenkinek azonositani kell magat
+			   .and()
+				.formLogin()
+					.loginPage("/login")					// a login ezen a path-en ered el
+					.permitAll()							// mindenki elerheti
+					.and()
+				.logout()									// kijelenkezes
+					.logoutSuccessUrl("/login?logout")		//itt ered el
+					.permitAll();							//mindenki
 	}
+	
+	
 }
