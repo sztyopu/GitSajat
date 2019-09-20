@@ -29,20 +29,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	//meg mondjuk ki mit erhet el
 	@Override
-	protected void configure(HttpSecurity httpSec) throws Exception {
-	   httpSec
-		  .authorizeRequests()
-			   .antMatchers("/admin/**").hasRole("ADMIN")   //admin/barmi -t is elerhet csak az admin 
-			   .anyRequest().authenticated()				// mindenkinek azonositani kell magat
-			   .and()
-				.formLogin()
-					.loginPage("/login")					// a login ezen a path-en ered el
-					.permitAll()							// mindenki elerheti
-					.and()
-				.logout()									// kijelenkezes
-					.logoutSuccessUrl("/login?logout")		//itt ered el
-					.permitAll();							//mindenki
-	}
-	
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.authorizeRequests()
+		     	.antMatchers("/css/**").permitAll()  // a forumon ajanlottak, megoldaskent arra, hogy ne jöjjön be a blog.css
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.anyRequest().authenticated()      //mindenkinek azonositani kell magat
+				.and()
+			.formLogin()
+				.loginPage("/login")               // lecserelem az alaplogint
+				.permitAll()						//mindenki elerheti
+				.and()
+			.logout()
+				.logoutSuccessUrl("/login?logout")
+				.permitAll();
+	}	
 	
 }
