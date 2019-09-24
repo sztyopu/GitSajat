@@ -34,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 		     	.antMatchers("/css/**").permitAll()  // a forumon ajanlottak, megoldaskent arra, hogy ne jöjjön be a blog.css
 				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/registration").permitAll()
+				.antMatchers("/reg").permitAll()
 				.anyRequest().authenticated()      //mindenkinek azonositani kell magat
 				.and()
 			.formLogin()
