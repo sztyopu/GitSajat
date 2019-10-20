@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
     private final Log log = LogFactory.getLog(this.getClass());
+  
+    private JavaMailSender javaMailSender;
+    
     
 	@Value("${spring.mail.username}")
 	private String MESSAGE_FROM;
 	
-	private JavaMailSender javaMailSender;
+	
 
 	@Autowired
 	public void setJavaMailSender(JavaMailSender javaMailSender) {

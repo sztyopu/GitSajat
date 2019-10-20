@@ -1,8 +1,8 @@
 package com.sec.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,10 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
-public class SecurityConf extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-
-		
+	
 	@Autowired
 	private UserDetailsService userService;
 	
@@ -22,20 +21,36 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userService);
 	}
-
 	
+//	@Autowired
+//	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
+//		//meghatarozzuk az ADMIN es a USER jelszavat/felhasznalonevet
+//		auth
+//		  .inMemoryAuthentication()
+//		    .withUser("sfjuser") 
+//		    .password("{noop}pass")
+//		    .roles("USER")
+//		   .and()
+//             .withUser("sfjadmin")
+//             .password("{noop}pass")
+//             .roles("ADMIN");
+//	}
+	
+	
+	//meg mondjuk ki mit erhet el
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
+		     	.antMatchers("/css/**").permitAll()  // a forumon ajanlottak, megoldaskent arra, hogy ne jöjjön be a blog.css
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/registration").permitAll()
 				.antMatchers("/reg").permitAll()
-				.anyRequest().authenticated()
+				.anyRequest().authenticated()      //mindenkinek azonositani kell magat
 				.and()
 			.formLogin()
-				.loginPage("/login")
-				.permitAll()
+				.loginPage("/login")               // lecserelem az alaplogint
+				.permitAll()						//mindenki elerheti
 				.and()
 			.logout()
 				.logoutSuccessUrl("/login?logout")
