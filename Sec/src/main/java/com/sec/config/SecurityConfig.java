@@ -7,24 +7,34 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	
+	@Autowired
+	private UserDetailsService userService;
+	
 	@Autowired
 	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
-		//meghatarozzuk az ADMIN es a USER jelszavat/felhasznalonevet
-		auth
-		  .inMemoryAuthentication()
-		    .withUser("sfjuser") 
-		    .password("{noop}pass")
-		    .roles("USER")
-		   .and()
-             .withUser("sfjadmin")
-             .password("{noop}pass")
-             .roles("ADMIN");
+		auth.userDetailsService(userService);
 	}
+	
+//	@Autowired
+//	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
+//		//meghatarozzuk az ADMIN es a USER jelszavat/felhasznalonevet
+//		auth
+//		  .inMemoryAuthentication()
+//		    .withUser("sfjuser") 
+//		    .password("{noop}pass")
+//		    .roles("USER")
+//		   .and()
+//             .withUser("sfjadmin")
+//             .password("{noop}pass")
+//             .roles("ADMIN");
+//	}
 	
 	
 	//meg mondjuk ki mit erhet el
